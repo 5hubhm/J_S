@@ -1,0 +1,4 @@
+document.getElementById("c-1").innerHTML =  '<p><i class="fa-solid fa-phone"></i> +9979134264</p>';
+document.getElementById("c-2").innerHTML = '<a href="mailto:shubhamkarwariya245@gmail.com" target="_blank"><i class="fa-regular fa-envelope"></i> shubhamkarwariya245@gmail.com</a>';
+document.getElementById("c-3").innerHTML = '<a href="https://www.linkedin.com/in/shubham-karwariya-6ab142326/" target="_blanc"><i class="fa-brands fa-linkedin"></i> LinkedIn Profile </a>';
+document.getElementById("c-4").innerHTML = '<a href="https://github.com/5hubhm" target="_blank"><i class="fa-brands fa-github"></i> GitHub Profile </a>';
