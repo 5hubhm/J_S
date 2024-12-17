@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dice Game</title>
+    <style>
+        /* General Body Styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            background-color: #1e1e2e;
+            color: #f8f8f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: #ff79c6;
+            margin: 20px 0;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0 auto;
+        }
+
+        .player-info {
+            font-size: 1.8rem;
+            margin: 10px;
+            color: #8be9fd;
+            font-weight: bold;
+        }
+
+        .dice {
+            font-size: 8rem;
+            margin: 30px 0;
+            color: #f1fa8c;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+        }
+
+        .buttons button {
+            padding: 15px 25px;
+            font-size: 1.2rem;
+            margin: 15px;
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .buttons button#roll1 {
+            background-color: #50fa7b;
+            color: #282a36;
+        }
+
+        .buttons button#roll2 {
+            background-color: #bd93f9;
+            color: #282a36;
+        }
+
+        .buttons button.reset {
+            background-color: #ff5555;
+            color: #fff;
+        }
+
+        .buttons button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        button:disabled {
+            background-color: #44475a;
+            color: #6272a4;
+            cursor: not-allowed;
+        }
+
+        .winner {
+            font-size: 2.5rem;
+            color: #ffb86c;
+            margin-top: 20px;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+        }
+
+        footer {
+            font-size: 1rem;
+            color: #6272a4;
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🎲 Dice Game 🎲</h1>
+
+        <!-- Player Score Display -->
+        <div id="player1" class="player-info">Player 1 Score: <span id="score1">0</span></div>
+        <div id="player2" class="player-info">Player 2 Score: <span id="score2">0</span></div>
+
+        <!-- Dice Display -->
+        <div class="dice" id="dice">🎲</div>
+
+        <!-- Buttons -->
+        <div class="buttons">
+            <button id="roll1">🎲 Roll for Player 1</button>
+            <button id="roll2" disabled>🎲 Roll for Player 2</button>
+            <button id="reset" class="reset">🔄 Reset</button>
+        </div>
+
+        <!-- Winner Display -->
+        <div class="winner" id="winner"></div>
+    </div>
+
+    <footer>Created with ❤️ for Fun</footer>
+
+    <!-- Script Integration -->
+    <script>
+        // Variables
+        let player1Score = 0;
+        let player2Score = 0;
+
+        const score1El = document.getElementById('score1');
+        const score2El = document.getElementById('score2');
+        const diceEl = document.getElementById('dice');
+        const winnerEl = document.getElementById('winner');
+        const roll1Btn = document.getElementById('roll1');
+        const roll2Btn = document.getElementById('roll2');
+        const resetBtn = document.getElementById('reset');
+
+        // Random Dice Roll
+        function rollDice() {
+            return Math.floor(Math.random() * 6) + 1;
+        }
+
+        // Player 1 Roll
+        roll1Btn.addEventListener('click', () => {
+            const roll = rollDice();
+            player1Score += roll;
+            score1El.textContent = player1Score;
+            diceEl.textContent = `🎲 ${roll}`;
+            roll1Btn.disabled = true;
+            roll2Btn.disabled = false;
+        });
+
+        // Player 2 Roll
+        roll2Btn.addEventListener('click', () => {
+            const roll = rollDice();
+            player2Score += roll;
+            score2El.textContent = player2Score;
+            diceEl.textContent = `🎲 ${roll}`;
+            roll1Btn.disabled = false;
+            roll2Btn.disabled = true;
+
+            // Check for Winner
+            if (player1Score >= 20 || player2Score >= 20) {
+                winnerEl.textContent =
+                    player1Score >= 20
+                        ? '🎉 Player 1 Wins! 🎉'
+                        : '🎉 Player 2 Wins! 🎉';
+                roll1Btn.disabled = true;
+                roll2Btn.disabled = true;
+            }
+        });
+
+        // Reset Game
+        resetBtn.addEventListener('click', () => {
+            player1Score = 0;
+            player2Score = 0;
+            score1El.textContent = player1Score;
+            score2El.textContent = player2Score;
+            diceEl.textContent = '🎲';
+            winnerEl.textContent = '';
+            roll1Btn.disabled = false;
+            roll2Btn.disabled = true;
+        });
+    </script>
+</body>
+
+</html>
