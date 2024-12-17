@@ -1,69 +1,114 @@
 /* General Reset */
-body, h1, h2, p, ul {
+body, h1, h2, p, ul, a {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
+    text-decoration: none;
 }
 
+/* Body Styling */
 body {
-    background-color: #e9f1f7; /* Softer off-white with a hint of blue */
-    color: #4a4a4a; /* Darker gray for text */
+    background-color: #f5f0fa; /* Light lavender background */
+    color: #333; /* Dark text for readability */
     line-height: 1.6;
-}
-
-.resume-container {
-    max-width: 800px;
-    margin: 20px auto;
-    background: #ffffff;
     padding: 20px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Slightly more prominent shadow */
-    border-radius: 10px; /* Rounded corners for a softer look */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 
-/* Header Section */
+/* Container Styling */
+.resume-container {
+    background: #ffffff; /* White background */
+    max-width: 800px;
+    width: 100%;
+    margin: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Subtle shadow */
+    padding: 20px;
+    border: 2px solid #6a0dad; /* Purple border */
+}
+
+/* Header Styling */
 header {
     text-align: center;
     margin-bottom: 20px;
 }
 
 header h1 {
+    color: #6a0dad; /* Purple for the name */
     font-size: 2.5rem;
-    color: #0056b3; /* Slightly darker blue */
+    margin-bottom: 10px;
 }
 
-header p a {
-    color: #6c757d; /* Muted gray for links */
-    text-decoration: none;
+header p {
+    font-size: 1rem;
+    color: #555; /* Slightly muted gray for text */
+    margin: 5px 0;
+}
+
+header a {
+    color: #6a0dad;
     font-weight: bold;
-    transition: color 0.3s ease; /* Smooth transition */
+    transition: color 0.3s ease-in-out;
 }
 
-header p a:hover {
-    color: #0056b3; /* Darker blue on hover */
+header a:hover {
+    color: #4b0082; /* Darker purple on hover */
 }
 
-/* Skills and Projects */
+/* Section Styling */
 section {
     margin-bottom: 20px;
 }
 
 section h2 {
-    border-bottom: 2px solid #0056b3; /* Matching the header color */
+    color: #6a0dad; /* Purple section headers */
+    border-bottom: 2px solid #6a0dad;
     display: inline-block;
     margin-bottom: 10px;
-    font-size: 1.8rem; /* Slightly larger section headings */
+    font-size: 1.8rem;
 }
 
-ul {
+section ul {
     list-style: none;
+    padding-left: 0;
 }
 
-ul li {
-    margin: 5px 0;
+section ul li {
+    margin-bottom: 10px;
     font-size: 1.1rem;
+    color: #444; /* Darker text for content */
 }
 
-ul li span {
-    color: #6c757d; /* Lighter gray for span elements */
+section ul li strong {
+    color: #6a0dad;
+}
+
+section p {
+    font-size: 1.1rem;
+    color: #444;
+}
+
+/* Skill List Styling */
+section:nth-child(3) {
+    font-size: 1.1rem;
+    color: #555;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 2rem;
+    }
+
+    section h2 {
+        font-size: 1.5rem;
+    }
+
+    section ul li {
+        font-size: 1rem;
+    }
 }
