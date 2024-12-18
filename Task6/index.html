@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Universal Converter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .converter-container {
+      display: inline-block;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      background-color: #f9f9f9;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .input-group {
+      margin: 20px 0;
+    }
+
+    .input-group input {
+      width: 100px;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      text-align: center;
+    }
+
+    .dropdown, .radio-buttons {
+      margin: 20px 0;
+    }
+
+    .radio-buttons label {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #ddd;
+      cursor: pointer;
+      margin: 0 10px;
+      transition: background-color 0.3s;
+    }
+
+    .radio-buttons input[type="radio"] {
+      display: none;
+    }
+
+    .radio-buttons input[type="radio"]:checked + label {
+      background-color: #ff5252;
+      color: white;
+      border: 1px solid #ff5252;
+    }
+  </style>
+</head>
+<body>
+  <h1>Universal Converter</h1>
+  <div class="converter-container">
+    <!-- Dropdown to select conversion type -->
+    <div class="dropdown">
+      <select id="conversionType" onchange="updateOptions()">
+        <option value="temperature">Temperature</option>
+        <option value="height">Height</option>
+        <option value="weight">Weight</option>
+      </select>
+    </div>
+
+    <!-- Radio buttons for specific conversions -->
+    <div class="radio-buttons" id="conversionOptions">
+      <!-- Temperature conversion options -->
+      <input type="radio" id="cToF" name="conversion" value="cToF" checked>
+      <label for="cToF">Celsius to Fahrenheit</label>
+
+      <input type="radio" id="fToC" name="conversion" value="fToC">
+      <label for="fToC">Fahrenheit to Celsius</label>
+    </div>
+
+    <div class="input-group">
+      <input type="number" id="inputValue" placeholder="Enter value">
+    </div>
+
+    <div class="input-group">
+      <input type="text" id="outputValue" readonly placeholder="Result">
+    </div>
+  </div>
+
+  <script>
+    const inputValue = document.getElementById('inputValue');
+    const outputValue = document.getElementById('outputValue');
+    const conversionOptions = document.getElementById('conversionOptions');
+    const conversionType = document.getElementById('conversionType');
+
+    function updateOptions() {
+      const type = conversionType.value;
+      conversionOptions.innerHTML = '';
+
+      if (type === 'temperature') {
+        conversionOptions.innerHTML = `
+          <input type="radio" id="cToF" name="conversion" value="cToF" checked>
+          <label for="cToF">Celsius to Fahrenheit</label>
+          <input type="radio" id="fToC" name="conversion" value="fToC">
+          <label for="fToC">Fahrenheit to Celsius</label>
+        `;
+      } else if (type === 'height') {
+        conversionOptions.innerHTML = `
+          <input type="radio" id="cmToInch" name="conversion" value="cmToInch" checked>
+          <label for="cmToInch">CM to Inches</label>
+          <input type="radio" id="inchToCm" name="conversion" value="inchToCm">
+          <label for="inchToCm">Inches to CM</label>
+        `;
+      } else if (type === 'weight') {
+        conversionOptions.innerHTML = `
+          <input type="radio" id="kgToPound" name="conversion" value="kgToPound" checked>
+          <label for="kgToPound">KG to Pounds</label>
+          <input type="radio" id="poundToKg" name="conversion" value="poundToKg">
+          <label for="poundToKg">Pounds to KG</label>
+        `;
+      }
+    }
+
+    function convert() {
+      const input = parseFloat(inputValue.value);
+      if (isNaN(input)) {
+        outputValue.value = '';
+        return;
+      }
+
+      let result = '';
+      const selectedConversion = document.querySelector('input[name="conversion"]:checked').value;
+
+      if (selectedConversion === 'cToF') {
+        result = ((input * 9) / 5 + 32).toFixed(2) + ' °F';
+      } else if (selectedConversion === 'fToC') {
+        result = (((input - 32) * 5) / 9).toFixed(2) + ' °C';
+      } else if (selectedConversion === 'cmToInch') {
+        result = (input / 2.54).toFixed(2) + ' inches';
+      } else if (selectedConversion === 'inchToCm') {
+        result = (input * 2.54).toFixed(2) + ' cm';
+      } else if (selectedConversion === 'kgToPound') {
+        result = (input * 2.20462).toFixed(2) + ' lbs';
+      } else if (selectedConversion === 'poundToKg') {
+        result = (input / 2.20462).toFixed(2) + ' kg';
+      }
+
+      outputValue.value = result;
+    }
+
+    inputValue.addEventListener('input', convert);
+    conversionOptions.addEventListener('change', convert);
+  </script>
+</body>
+</html>
