@@ -1,0 +1,16 @@
+*{
+    box-sizing : border-box;
+    text-align : center;
+}
+
+.container{
+    background-color: rgb(174, 174, 218);
+    padding :10px;
+    margin : 5px;
+    
+}
+.subcon{
+    display: flex;
+    flex-direction: row;
+}
+
