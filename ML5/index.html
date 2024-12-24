@@ -1,73 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Classification</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.js"></script>
-    <script src="https://unpkg.com/ml5@1/dist/ml5.min.js"></script>
-    <style>
-        /* General styling */
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f7f7f7;
-            color: #333;
-        }
-        
-        header {
-            background-color: #4CAF50;
-            color: white;
-            padding: 15px 20px;
-            text-align: center;
-        }
-
-        h1 {
-            font-size: 2.5em;
-            margin: 0;
-        }
-
-        #myResult {
-            font-size: 1.5em;
-            font-weight: bold;
-            text-align: center;
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #e0f7fa;
-            border-radius: 5px;
-            color: #00796b;
-        }
-
-        #myImage {
-            display: block;
-            margin: 20px auto;
-            max-width: 80%;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Mobile responsiveness */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2em;
-            }
-
-            #myImage {
-                max-width: 90%;
-            }
-        }
-    </style>
+    <title>Image Classifier</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- ML5.js Library -->
+    <script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script>
 </head>
+
 <body>
+    <div class="container">
+        <h1>Image Classifier</h1>
 
-    <header>
-        <h1>Image Classification</h1>
-    </header>
+        <!-- Model Loading Status -->
+        <div id="model-status" class="status">
+            Loading model...
+        </div>
 
-    <div id="myResult">Scanning ...</div>
-    <img id="myImage" src="./assets/sukuna-5120x2880-25871.jpg" alt="Image for classification">
+        <!-- Upload Section -->
+        <div class="upload-section">
+            <input type="file" id="image-input" accept="image/*" class="hidden">
+            <label for="image-input" class="upload-button">
+                Choose Image or Drop Here
+            </label>
+            <p class="info">Supported formats: JPG, PNG</p>
+        </div>
+
+        <!-- Preview Section -->
+        <div class="preview-section hidden">
+            <h2>Preview</h2>
+            <div class="image-container">
+                <img id="preview-image" alt="Preview">
+            </div>
+
+            <!-- Loading Spinner -->
+            <div id="loading-spinner" class="spinner hidden"></div>
+
+            <!-- Results Section -->
+            <div id="results" class="results-container">
+                <h2>Classification Results</h2>
+                <div id="predictions" class="predictions">
+                    <!-- Predictions will be inserted here -->
+                </div>
+            </div>
+
+            <!-- Reset Button -->
+            <button id="reset-button" class="reset-button">
+                Try Another Image
+            </button>
+        </div>
+    </div>
 
     <script src="scripts.js"></script>
 </body>
+
 </html>
