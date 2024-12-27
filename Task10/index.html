@@ -173,7 +173,7 @@
                 const className = prediction[i].className;
                 const probability = prediction[i].probability.toFixed(2);
 
-                labelContainer.childNodes[i].innerHTML = `${className}: ${(probability * 100).toFixed(2)}%`;
+                labelContainer.childNodes[i].innerHTML = `${className}: ${(probability * 100).toFixed(2)}%`;    
 
                 if (probability > 0.9 && !isProcessing) {
                     isProcessing = true;
